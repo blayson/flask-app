@@ -11,8 +11,8 @@ flask = "*"
 flask-wtf = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
-yapf = "*"
 flask-login = "*"
+yapf = "*"
 
 
 [dev-packages]
