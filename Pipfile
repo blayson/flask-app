@@ -13,6 +13,8 @@ flask-sqlalchemy = "*"
 flask-migrate = "*"
 flask-login = "*"
 yapf = "*"
+flask-mail = "*"
+pyjwt = "*"
 
 
 [dev-packages]
