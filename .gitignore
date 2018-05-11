@@ -1,6 +1,10 @@
 .vscode/
+.idea/
+.vagrant/
 __pycache__/
 migrations/
-app.db
 logs/
+
+app.db
 .env
+*.log
