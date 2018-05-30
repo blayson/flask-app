@@ -2,9 +2,5 @@
 .idea/
 .vagrant/
 __pycache__/
-migrations/
 logs/
-
-app.db
-.env
-*.log
+*.logs
