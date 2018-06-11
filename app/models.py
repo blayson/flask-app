@@ -88,6 +88,8 @@ class PaginatedAPIMixin(object):
 
 
 class User(PaginatedAPIMixin, UserMixin, db.Model):
+    """Representation of user model in db."""
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
@@ -194,8 +196,7 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
                                     complete=False).first()
 
     def to_dict(self, include_email=False):
-        """
-        Convert User Object to dictionary
+        """Convert User Object to dictionary
 
         :param include_email: if true: add email
         :return: dictionary with data form user object
@@ -220,8 +221,7 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
         return data
 
     def from_dict(self, data, new_user=False):
-        """
-        Set up properties form dictionary to user object
+        """Set up properties form dictionary to user object
 
         :param data: dictionary with properties
         :param new_user: if true: set password
@@ -254,6 +254,8 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
 
 
 class Post(SearchableMixin, db.Model):
+    """Representation of post model in db."""
+
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -270,6 +272,8 @@ db.event.listen(db.session, 'after_commit', Post.after_commit)
 
 
 class Message(db.Model):
+    """Representation of message model in db."""
+
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -281,6 +285,8 @@ class Message(db.Model):
 
 
 class Notification(db.Model):
+    """Representation of notification model in db."""
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -292,6 +298,8 @@ class Notification(db.Model):
 
 
 class Task(db.Model):
+    """Representation of task model in db."""
+
     id = db.Column(db.String(36), primary_key=True)
     name = db.Column(db.String(128), index=True)
     description = db.Column(db.String(128))
