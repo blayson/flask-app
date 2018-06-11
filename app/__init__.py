@@ -32,6 +32,7 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
+    # Make application instances
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
@@ -45,6 +46,7 @@ def create_app(config_class=Config):
     app.redis = Redis.from_url(app.config['REDIS_URL'])
     app.task_queue = rq.Queue('microblog-tasks', connection=app.redis)
 
+    # Register application blueprints
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
 
@@ -54,6 +56,10 @@ def create_app(config_class=Config):
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
+    from app.api import bp as api_bp
+    app.register_blueprint(api_bp, url_prefix='/api')
+
+    # Setup mail handler and logger
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
             auth = None
@@ -95,4 +101,5 @@ def get_locale():
     return request.accept_languages.best_match(current_app.config['LANGUAGES'])
 
 
+# Move import to the end of file to avoid circular import
 from app import models
